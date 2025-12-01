@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from "react";
 import { Trash2, Edit2, Plus, X, Dumbbell, TrendingUp } from "lucide-react";
+import LogoutButton from "../pages/login-button";
 
 interface Exercise {
   id: number;
@@ -179,15 +180,19 @@ export default function GymWorkoutApp() {
   );
 
   return (
-    <div className='min-h-screen bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900 p-4 sm:p-8'>
+    <div className='min-h-screen bg-linear-to-br from-slate-900 via-purple-900 to-slate-900 p-4 sm:p-8'>
       <div className='mx-auto max-w-7xl'>
         {/* Header */}
         <div className='mb-8'>
-          <div className='flex items-center gap-3 mb-2'>
-            <Dumbbell className='w-8 h-8 text-red-500' />
-            <h1 className='text-4xl font-bold text-white'>
-              Gym Workout Tracker
-            </h1>
+          <div className='flex justify-between items-center'>
+            <div className='flex items-center gap-3 mb-2'>
+              <Dumbbell className='w-8 h-8 text-red-500' />
+              <h1 className='text-4xl font-bold text-white'>
+                Gym Workout Tracker
+              </h1>
+            </div>
+
+            <LogoutButton />
           </div>
           <p className='text-gray-300'>
             Track your exercises and monitor your progress
@@ -196,7 +201,7 @@ export default function GymWorkoutApp() {
 
         {/* Stats Cards */}
         <div className='grid grid-cols-1 md:grid-cols-3 gap-4 mb-8'>
-          <div className='bg-gradient-to-br from-red-600 to-red-700 rounded-lg p-6 text-white'>
+          <div className='bg-linear-to-br from-red-600 to-red-700 rounded-lg p-6 text-white'>
             <div className='flex items-center justify-between'>
               <div>
                 <p className='text-red-100 text-sm mb-1'>Total Exercises</p>
@@ -206,7 +211,7 @@ export default function GymWorkoutApp() {
             </div>
           </div>
 
-          <div className='bg-gradient-to-br from-blue-600 to-blue-700 rounded-lg p-6 text-white'>
+          <div className='bg-linear-to-br from-blue-600 to-blue-700 rounded-lg p-6 text-white'>
             <div className='flex items-center justify-between'>
               <div>
                 <p className='text-blue-100 text-sm mb-1'>Total Volume</p>
@@ -216,7 +221,7 @@ export default function GymWorkoutApp() {
             </div>
           </div>
 
-          <div className='bg-gradient-to-br from-purple-600 to-purple-700 rounded-lg p-6 text-white'>
+          <div className='bg-linear-to-br from-purple-600 to-purple-700 rounded-lg p-6 text-white'>
             <div className='flex items-center justify-between'>
               <div>
                 <p className='text-purple-100 text-sm mb-1'>Total Weight</p>
@@ -359,7 +364,7 @@ export default function GymWorkoutApp() {
                   <div className='flex gap-2 pt-4'>
                     <button
                       onClick={handleAddExercise}
-                      className='flex-1 bg-gradient-to-r from-red-600 to-red-700 hover:from-red-700 hover:to-red-800 text-white font-semibold py-2 px-4 rounded-lg transition duration-200'
+                      className='flex-1 bg-linear-to-r from-red-600 to-red-700 hover:from-red-700 hover:to-red-800 text-white font-semibold py-2 px-4 rounded-lg transition duration-200'
                     >
                       {editingId ? "Update" : "Add"} Exercise
                     </button>
@@ -373,7 +378,7 @@ export default function GymWorkoutApp() {
           <div className={`${showForm ? "lg:col-span-3" : "lg:col-span-4"}`}>
             <div className='bg-gray-800 rounded-xl shadow-2xl border border-gray-700 overflow-hidden'>
               {/* Header */}
-              <div className='bg-gradient-to-r from-red-600 to-red-700 text-white p-6'>
+              <div className='bg-linear-to-r from-red-600 to-red-700 text-white p-6'>
                 <div className='flex justify-between items-center mb-4'>
                   <div>
                     <h2 className='text-2xl font-bold'>💪 Your Workouts</h2>

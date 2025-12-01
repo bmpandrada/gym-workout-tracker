@@ -191,7 +191,7 @@ export default function JobCrudApp() {
   };
 
   return (
-    <div className='min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-50 p-4 sm:p-8'>
+    <div className='min-h-screen bg-linear-to-br from-slate-50 via-blue-50 to-indigo-50 p-4 sm:p-8'>
       <div className='mx-auto max-w-7xl'>
         {/* Header */}
         <div className='mb-8'>
@@ -365,7 +365,7 @@ export default function JobCrudApp() {
           <div className={`${showForm ? "lg:col-span-3" : "lg:col-span-4"}`}>
             <div className='bg-white rounded-xl shadow-lg border border-gray-200 overflow-hidden'>
               {/* Header */}
-              <div className='bg-gradient-to-r from-blue-600 to-indigo-600 text-white p-6'>
+              <div className='bg-linear-to-r from-blue-600 to-indigo-600 text-white p-6'>
                 <div className='flex justify-between items-center'>
                   <div>
                     <h2 className='text-2xl font-bold'>📋 Jobs List</h2>

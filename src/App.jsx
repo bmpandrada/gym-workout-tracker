@@ -1,18 +1,11 @@
-import { Theme } from "@radix-ui/themes/dist/cjs/index.js";
-import GymWorkoutApp from "./components/gym-workout-app";
+import { Theme } from "@radix-ui/themes";
+import AppRoutes from "./routes.jsx";
 
 const App = () => {
   return (
-    <>
-      <Theme
-        accentColor='crimson'
-        grayColor='sand'
-        radius='large'
-        scaling='95%'
-      >
-        <GymWorkoutApp />
-      </Theme>
-    </>
+    <Theme accentColor='crimson' grayColor='sand' radius='large' scaling='95%'>
+      <AppRoutes />
+    </Theme>
   );
 };
 
