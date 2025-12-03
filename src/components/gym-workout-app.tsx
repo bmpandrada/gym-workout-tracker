@@ -32,6 +32,20 @@ export default function GymWorkoutApp() {
     const savedExercises = localStorage.getItem("gymExercises");
     return savedExercises ? JSON.parse(savedExercises) : [];
   });
+  const [username, setUsername] = useState(
+    localStorage.getItem("username") || "Guest",
+  );
+
+  useEffect(() => {
+    const handleStorage = () => {
+      setUsername(localStorage.getItem("username") || "Guest");
+    };
+
+    window.addEventListener("storage", handleStorage);
+
+    return () => window.removeEventListener("storage", handleStorage);
+  }, []);
+
   const [formData, setFormData] = useState({
     name: "",
     muscleGroup: "Chest",
@@ -187,13 +201,17 @@ export default function GymWorkoutApp() {
           <div className='flex justify-between items-center'>
             <div className='flex items-center gap-3 mb-2'>
               <Dumbbell className='w-8 h-8 text-red-500' />
-              <h1 className='text-4xl font-bold text-white'>
+              <h1 className='text-2xl md:text-4xl font-bold text-white'>
                 Gym Workout Tracker
               </h1>
             </div>
-
-            <LogoutButton />
+            <div className='flex flex-col sm:flex-row items-center gap-2 sm:gap-4'>
+              <LogoutButton />
+            </div>
           </div>
+          <h2 className='text-white my-2'>
+            Welcome, <span className='font-bold'>{username.trim()}</span>
+          </h2>
           <p className='text-gray-300'>
             Track your exercises and monitor your progress
           </p>

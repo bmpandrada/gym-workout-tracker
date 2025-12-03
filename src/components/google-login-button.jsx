@@ -14,16 +14,39 @@ export default function GoogleLoginButton() {
     onSuccess: async (response) => {
       setLoading(true);
       setError("");
-      const tokenId = response.credential || response.access_token;
 
       try {
+        // --- 1. GET GOOGLE USER INFO ---
+        const userInfoRes = await fetch(
+          "https://www.googleapis.com/oauth2/v3/userinfo",
+          {
+            headers: {
+              Authorization: `Bearer ${response.access_token}`,
+            },
+          },
+        );
+
+        const user = await userInfoRes.json();
+
+        // After getting the user object from Google
+        const fullName = user.name || "Guest";
+        const firstName = fullName.split(" ")[0]; // <-- take only the first name
+
+        localStorage.setItem("username", firstName);
+
+        console.log("Google User:", user);
+
+        // --- 2. SEND TOKEN TO BACKEND ---
         const res = await fetch(`${BACKEND_URL}/api/google-login`, {
           method: "POST",
           headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ tokenId }),
+          body: JSON.stringify({ tokenId: response.access_token }),
         });
+
         const data = await res.json();
         localStorage.setItem("token", data.token);
+
+        // --- 3. NAVIGATE ---
         navigate("/");
       } catch (err) {
         console.error(err);
@@ -32,6 +55,7 @@ export default function GoogleLoginButton() {
         setLoading(false);
       }
     },
+
     onError: () => {
       setError("Login failed. Please try again.");
       setLoading(false);
@@ -47,11 +71,13 @@ export default function GoogleLoginButton() {
             Gym Workout Tracker
           </h1>
         </div>
+
         <p className='text-gray-500 mb-8'>
           Sign in with your Google account to continue
         </p>
+
         <button
-          onClick={() => login()}
+          onClick={login}
           disabled={loading}
           className='flex items-center justify-center w-full bg-white border border-gray-300 hover:bg-gray-100 px-5 py-3 rounded-lg shadow-md transition-all duration-200 hover:shadow-xl'
         >
@@ -62,6 +88,7 @@ export default function GoogleLoginButton() {
           />
           {loading ? "Signing in..." : "Sign in with Google"}
         </button>
+
         {error && <p className='text-red-500 mt-4'>{error}</p>}
       </div>
     </div>
